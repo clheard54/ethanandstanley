@@ -1,44 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Ethan and Stanley Seeking Surrogate</title>
-    <link rel="stylesheet" href="./styles.css">
+  <title>Ethan and Stanley Seeking Surrogate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
+<style>
+  body {
+
+	background-image: url('grunge_patterns.jpg');
+	background-attachment: fixed;
+	color: #333;
+  }
+
+  .box {
+	border-radius: 3px;
+	background: rgba(101, 101, 101, 0.7); margin: auto; padding: 12px;
+  }
+
+  .lightbox {
+	zoom: 1.5;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(10, 10, 10, 0.8);
+	text-align: center;
+	margin: auto;
+
+  }
+
+  div.horizontal {
+	display: flex;
+	justify-content: center;
+	height: 100%;
+  }
+
+  div.vertical {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+  }
+
+  ::-webkit-input-placeholder {
+   color: #955;
+   text-align: center;
+  }
+
+  ::-moz-placeholder {
+   color: #955;
+   text-align: center;
+  }
+
+  :-ms-input-placeholder {
+   color: #955;
+   text-align: center;
+  }
+</style>
+
 <body>
-  <div class="body">
-    <h2 class="title">Ethan and Stanley are looking for a Surrogate</h2>
+	<div id="loginbox" class="lightbox" >
+		<div class="horizontal">
+			<div class="vertical">
+				<div class="box">
+					<input style="margin: 16px; text-align: center;" id="password" type="password" placeholder="password" /> <br />
+					<button id="loginbutton" type="button">Enter</button>
+					<p id="wrongPassword" style="display: none">wrong password</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div>
-      <img class="image" src="./eands.jpeg" alt="Ethan and Stanley on the balcony of the Kennedy Center"></img>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 
-      <p class="text-start">We are growing our family and are so excited to have a child! Turns out, it’s kinda tricky for two guys to do that. So, we are looking to our community of family, friends, and friends-of-friends to see if we might find a really amazing person to help us with this process by being our Surrogate.</p>
-    <br/>
 
-      <span class="bold">About Us</span> 
-      <p class="text">We met 10 years ago at a party where Stanley was singing and Ethan was secretly recording the concert! On our first date, Ethan revealed that he had a playlist from that night and Stanley revealed that he had been stalking Ethan on Facebook while he was in grad school. Talent crushes quickly became deep admiration and love and 7 years later to the day we got married in the Berkshire mountains under a grove of birch trees.</p>
+	 <script type="text/javascript" src="https://rawcdn.githack.com/chrisveness/crypto/7067ee62f18c76dd4a9d372a00e647205460b62b/sha1.js"></script>
 
-      <p class="text">Ethan grew up in Washington DC, has three terrific sisters, and has lived on the east coast his whole life. Stanley grew up in Columbus, Ohio, and has a large extended family including a brother and sister-in-law who have adorable twin girls. We love to travel (Italy, China, Mexico…), play tennis, host BBQs with friends, and binge watch RuPaul’s Drag Race. We both love and work in the arts. Stanley is a performer who was in three Broadway shows and a really fun Netflix TV show. Now he runs a production company and helps nonprofits plan their events. Ethan is co-founder of Heartbeat Opera, known for radically re-envisioning the classics. Ethan has just accepted a new role as Associate Artistic Director at a theater in Washington DC. We are so excited to be in Ethan’s hometown and take this next step in our life together: a baby!</p>
-    </div>
+	<script type="text/javascript">
+	"use strict";
 
-  <span class="bold">About You</span>
-    <p class="text">Based on our clinic’s screening process a good candidate needs to meet a few requirements:</p>
-        <ul>    
-        <li>21-40 years old</li>
-        <li>US Citizen living in a surrogacy friendly state (Most states are friendly! The exceptions are: MI, NE, LA, IN, AZ)</li>
-        <li>Had one successful pregnancy and delivered at least one child</li>
-        <li>No more than 3 cesarian sections</li>
-        <li>BMI of less than 33</li>
-        <li>Non-smoker, Non-drug user</li>
-        </ul>
 
-    <p class="text-bottom">Most of all, our surrogate is someone who is in a good place in their life and believes in helping two terrific gay guys make a family. With our agency, we will support our surrogate through the process, providing emotional guidance, legal support, and financial compensation.</p> 
-    <div class="footer">
-        <b><h3>Think you might be that amazing person to help us have a baby?</h3></b>
-            
-        <p class="link">Please contact us <a href="https://www.google.com" target="_blank">here</a></p>
-    </div>
-    <br/><br/>
-  </div>
+	function loadPage(pwd) {
+
+		var hash= pwd;
+		hash= Sha1.hash(pwd);
+		var url= hash + "/index.html";
+
+		$.ajax({
+			url : url,
+			dataType : "html",
+			success : function(data) {
+
+				window.location= url;
+
+			},
+			error : function(xhr, ajaxOptions, thrownError) {
+
+
+				parent.location.hash= hash;
+
+				//$("#wrongPassword").show();
+				$("#password").attr("placeholder","wrong password");
+				$("#password").val("");
+			}
+		});
+	}
+
+
+	$("#loginbutton").on("click", function() {
+		loadPage($("#password").val());
+	});
+	$("#password").keypress(function(e) {
+		if (e.which == 13) {
+
+			loadPage($("#password").val());
+		}
+	});
+	$("#password").focus();
+
+	</script>
+
 </body>
 </html>
